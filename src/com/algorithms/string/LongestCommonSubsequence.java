@@ -11,7 +11,7 @@ import java.util.Collections;
  * 设两个序列X={x1,x2,x3，...xi}, Y={y1,y2,y3，....，yi}
  * 设一个opt[i,j]: 保存Xi与Yj的LCS长度
  * opt(i,j) = max{opt(i,j-1),opt(i-1,j)} if x[i] != y[j]
- * = opt(i-1, j-1)              if a[i] = y[j]
+ * = opt(i-1, j-1)              if x[i] = y[j]
  * 注意opt[i][j]的i与j与X,Y的i,j不同
  */
 public class LongestCommonSubsequence {
