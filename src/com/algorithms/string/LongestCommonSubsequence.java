@@ -23,7 +23,7 @@ public class LongestCommonSubsequence {
         int m = x.length(), n = y.length();
         int i, j;
         //初始化opt
-        opt = new int[m+1][n+1];
+        opt = new int[m + 1][n + 1];
         for (i = 0; i <= m; i++) {
             opt[i][0] = 0;
         }
@@ -34,7 +34,7 @@ public class LongestCommonSubsequence {
         //dp
         for (i = 1; i <= m; i++) {
             for (j = 1; j <= n; j++) {
-                if (x.charAt(i-1) == y.charAt(j-1)) {
+                if (x.charAt(i - 1) == y.charAt(j - 1)) {
                     opt[i][j] = opt[i - 1][j - 1] + 1;
                 } else {
                     opt[i][j] = Math.max(opt[i - 1][j], opt[i][j - 1]);
@@ -44,28 +44,36 @@ public class LongestCommonSubsequence {
         return opt[m][n];
     }
 
-    // 可以根据opt[][]矩阵确定LCS路线
-    // 即可以通过opt[i-1][j-1], opt[i-1][j]和opt[i][j-1]
-    // O(1)时间推测出opt[i][j]从哪一个值计算过来
+    /**
+     * 可以根据opt[][]矩阵确定LCS路线
+     * 即可以通过opt[i-1][j-1], opt[i-1][j]和opt[i][j-1]
+     * O(1)时间推测出opt[i][j]从哪一个值计算过来
+     */
     public String printLCS(String x, String y) {
         StringBuilder sb = new StringBuilder();
         //计算opt
         LCS(x, y);
         int i = opt.length - 1, j = opt[0].length - 1;
         //倒推LCS路径
-        while (i > 0 && j > 0){
-            if (x.charAt(i-1) == y.charAt(j -1) && opt[i][j] == opt[i-1][j-1] + 1){
-                sb.append(x.charAt(i-1));      //x[i] == y[j]
-                i--; j--;
-            } else if (opt[i][j] == opt[i][j-1]){
+        while (i > 0 && j > 0) {
+            if (x.charAt(i - 1) == y.charAt(j - 1) && opt[i][j] == opt[i - 1][j - 1] + 1) {
+                sb.append(x.charAt(i - 1));      //x[i] == y[j]
+                i--;
                 j--;
-            } else if (opt[i][j] == opt[i-1][j]) {
+            } else if (opt[i][j] == opt[i][j - 1]) {
+                j--;
+            } else if (opt[i][j] == opt[i - 1][j]) {
                 i--;
             }
         }
         sb.reverse();
         return sb.toString();
     }
+
+    /**
+     * 另外的优化:opt[i][j]只与当前行和前一行有关
+     * 单纯计算LCS长度时只需保存两行opt数据即可 O(2*min(m,n))
+     */
 
     //test
     public static void main(String[] args) {
