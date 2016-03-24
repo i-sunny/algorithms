@@ -16,9 +16,11 @@ import java.util.Comparator;
 
 public class SuffixArray {
 
-    //最直接的方法构建后缀数组
-    //Time: O(n^2lgn) 排序复杂度O(nlgn),compare复杂度O(n)
-    // SA[i]表示排名第i的后缀在str中的起始位置
+    /**
+     * 最直接的方法构建后缀数组
+     * Time: O(n^2lgn) 排序复杂度O(nlgn),compare复杂度O(n)
+     * SA[i]表示排名第i的后缀在str中的起始位
+     */
     public static int[] buildSuffixArray(final String str) {
         Integer[] sa = new Integer[str.length()];
         for (int i = 0; i < str.length(); i++) {
@@ -38,8 +40,7 @@ public class SuffixArray {
         return ret;
     }
 
-    public static int[] buildRank(String str) {
-        int[] sa = buildSuffixArray(str);
+    public static int[] buildRank(String str, int[] sa) {
         int[] rank = new int[sa.length];
         for (int i = 0; i < sa.length; i++) {
             rank[sa[i]] = i;
@@ -49,8 +50,7 @@ public class SuffixArray {
 
     // Height[i]表示后缀SA[i]和SA[i-1]的最长公共前缀(Longest Common Prefix,LCP)
     // 简记为Height[i]=LCP(SA[i],SA[i-1])
-    public static int[] buildHeight(String str) {
-        int[] sa = buildSuffixArray(str);
+    public static int[] buildHeight(String str, int[] sa) {
         int[] height = new int[sa.length];
         height[0] = 0;
 
@@ -66,14 +66,9 @@ public class SuffixArray {
         return height;
     }
 
-    public static int[] buildHeight2(String str) {
+    //通过rank[] 更高效
+    public static int[] buildHeight(String str, int[] sa, int[] rank) {
         int len = str.length();
-        int[] sa = buildSuffixArray(str);
-        int[] rank = new int[len];
-        for (int i = 0; i < len; i++) {
-            rank[sa[i]] = i;
-        }
-
         int i, k, h = 0;
         int[] height = new int[len];
         for (i = 0; i < str.length(); i++) {
@@ -104,14 +99,22 @@ public class SuffixArray {
         for (int i : sa) {
             System.out.print(i + " ");
         }
+
+        System.out.print("\nrank: ");
+        int[] rank = buildRank(str, sa);
+        for (int i : rank) {
+            System.out.print(i + " ");
+        }
+
         System.out.print("\nheight1: ");
-        int[] h = buildHeight(str);
+        int[] h = buildHeight(str, sa);
         for (int i : h) {
             System.out.print(i + " ");
         }
+
         System.out.print("\nheight2: ");
-        h = buildHeight2(str);
-        for (int i : h) {
+        int[] h2 = buildHeight(str, sa, rank);
+        for (int i : h2) {
             System.out.print(i + " ");
         }
     }
