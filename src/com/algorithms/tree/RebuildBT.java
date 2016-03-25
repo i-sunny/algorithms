@@ -2,7 +2,7 @@ package com.algorithms.tree;
 
 /**
  * Created by sunny on 16/3/25.
- *
+ * 编程之美 3.9
  * 根据前序和中序重建二叉树
  * 前序: abdcef  中序: dbaecf  根据前序可以确定a是根节点，根据中序确定(db)和(ecf)是左右子树
  * 前序: a(X)(Y) 中序: (X)a(Y) 因此问题可以转换成X,Y两个子问题
