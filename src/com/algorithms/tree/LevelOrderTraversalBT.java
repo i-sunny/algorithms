@@ -1,7 +1,10 @@
 package com.algorithms.tree;
 
+import java.net.URLClassLoader;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by sunny on 16/3/25.
@@ -48,8 +51,10 @@ public class LevelOrderTraversalBT {
      * 利用队列分层进行入队 同时利用curCnt指示在队列中该层节点剩余个数
      */
     public static void traversalNodeByLevel2(Node root) {
-        Queue<Node> queue = new LinkedList<Node>();
 
+        if (root == null) return;
+
+        Queue<Node> queue = new LinkedList<Node>();
         queue.offer(root);
         int curCnt = 1, nxtCnt = 0;
         Node node;
