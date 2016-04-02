@@ -18,7 +18,7 @@ public class LowestCommonAncestor {
      * 2)找到从根到n2的路径，并存储在一个向量或数组中。
      * 3) 遍历这两条路径，直到遇到一个不同的节点，则前面的那个即为最低公共祖先.
      */
-    private boolean findPath(Node root, List<Node> path, int val){
+    public static boolean findPath(Node root, List<Node> path, int val){
 
         if (root == null)
             return false;
@@ -36,7 +36,7 @@ public class LowestCommonAncestor {
         return false;
     }
 
-    public Node fingLCA(Node root, int n1, int n2){
+    public static Node fingLCA(Node root, int n1, int n2){
         List<Node> path1 = new ArrayList<Node>(), path2 = new ArrayList<Node>();
         boolean find1 = findPath(root, path1, n1);
         boolean find2 = findPath(root, path2, n2);
@@ -54,7 +54,7 @@ public class LowestCommonAncestor {
     /**
      * O(n)并且只需遍历一次
      */
-    public Node findLCA2(Node root, int n1, int n2) {
+    public static Node findLCA2(Node root, int n1, int n2) {
 
         //递归出口
         if (root == null)
@@ -84,12 +84,11 @@ public class LowestCommonAncestor {
         char[] inOrder = new char[]{'d', 'b', 'a', 'e', 'c', 'f'};
         Node root = RebuildBT.rebuildTree(preOrder.length, preOrder, 0, inOrder, 0);
 
-        LowestCommonAncestor lca = new LowestCommonAncestor();
-        Node ans = lca.fingLCA(root, 'b', 'f');
+        Node ans = LowestCommonAncestor.fingLCA(root, 'b', 'f');
         System.out.println(ans.val);
 
         //version 2
-        ans = lca.findLCA2(root, 'e', 'f');
+        ans = LowestCommonAncestor.findLCA2(root, 'e', 'f');
         System.out.println(ans.val);
     }
 
