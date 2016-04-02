@@ -14,7 +14,8 @@ public class QuickSort {
         quickSort(a, p + 1, high);
     }
 
-    private static int partition(int[] a, int low, int high) {
+    //返回左右两部分的中间位置
+    public static int partition(int[] a, int low, int high) {
         int pivot = a[low];
         int li = low + 1, hi = high;
         while (li <= hi){
