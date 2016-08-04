@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 递归
  * clonedMap用来维护已经clone的node,注意clonedMap需要指向新的node(即克隆后的node)
- * @author sunny
+ * @author xiaoqi.sxq
  * @version $Id: CloneGraph.java, v 0.1 2016-08-04 15:30 xiaoqi.sxq Exp $
  */
 public class CloneGraph {
