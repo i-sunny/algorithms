@@ -3,6 +3,8 @@ package com.algorithms.graph;
 import java.util.*;
 
 /**
+ * 图的深度拷贝
+ * 来源: https://leetcode.com/problems/clone-graph/
  * 递归
  * clonedMap用来维护已经clone的node,注意clonedMap需要指向新的node(即克隆后的node)
  * @author xiaoqi.sxq
